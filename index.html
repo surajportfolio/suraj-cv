@@ -1,378 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>suraj personal portfolio desgin</title>
-
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suraj Kumar - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Base styles */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --light-gray: #e2e8f0;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f1f5f9;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Layout */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 300px;
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      color: white;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    
+    .profile {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      margin: 0 auto 1.5rem;
+      overflow: hidden;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: #3b82f6;
+    }
+    
+    .profile h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .profile p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .contact-info {
+      margin: 1.5rem 0;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    
+    .contact-item i {
+      width: 30px;
+      font-size: 1.2rem;
+      margin-right: 0.8rem;
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-3px);
+      color: var(--light-gray);
+    }
+    
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background: white;
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-list {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    
+    .navbar-link {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-link:hover {
+      color: var(--primary);
+    }
+    
+    .navbar-link.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Content sections */
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    
+    .section-header h2 {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* About section */
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--dark);
+    }
+    
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .service-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+    }
+    
+    /* Resume section */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--light-gray);
+      left: 30px;
+      margin-left: -1px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 70px;
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .timeline-date {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .timeline-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    .timeline-content ul {
+      padding-left: 1.2rem;
+      margin-top: 0.8rem;
+    }
+    
+    .timeline-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .skill-category {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .skill-category h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      color: var(--dark);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    
+    .skill-bar {
+      margin-bottom: 1.2rem;
+    }
+    
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .skill-progress {
+      height: 8px;
+      background: var(--light-gray);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .skill-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    
+    .skill-tag {
+      background: var(--light-gray);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* Portfolio section */
+    .portfolio-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    
+    .filter-btn {
+      background: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .portfolio-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .portfolio-img {
+      height: 200px;
+      background: linear-gradient(45deg, #3b82f6, #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+    
+    .portfolio-content {
+      padding: 1.5rem;
+    }
+    
+    .portfolio-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .portfolio-category {
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .portfolio-link:hover {
+      gap: 0.7rem;
+    }
+    
+    /* Contact section */
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .contact-info-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .contact-info-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    
+    .contact-map {
+      height: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--light-gray);
+    }
+    
+    .contact-form-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+      
+      .navbar-list {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile">
+        <div class="avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <h1>Suraj Kumar</h1>
+        <p>Software Engineer</p>
+      </div>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>surajkumar04ks@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 9971241276</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Noida, Uttar Pradesh, India</span>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://github.com/surajkumar04sk" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/04surajkumar" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </aside>
     
-<!-- header section starts  -->
-
-<header class="header">
-
-    <div class="user">
-        <img src="image/SURAJ.jpeg" alt="">
-        <h3>SURAJ</h3>
-        <p>App and Web Developer</p>
-    </div>
-
-    <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#about">about</a>
-		 <a href="#education">education</a>
-		 <a href="#services">Courses</a>
-        <a href="#portfolio">Project</a>
-        <a href="#contact">contact</a>
-    </nav>
-
-</header>
-
-<!-- header section ends -->
-
-<div id="menu-btn" class="fas fa-bars"></div>
-
-<!-- theme toggler  -->
-
-<div id="theme-toggler" class="fas fa-moon"></div>
-
-<!-- home section starts  -->
-
-<section class="home" id="home">
-
-    <div class="content">
-        <h3>SURAJ</h3>
-        <p>i am  app and web developer</p>
-        <a href="https://drive.google.com/uc?id=15OZEDnrV4EU7576eaD3zcFZwRq6q5ANS&export=download" class="btn" target="_blank">download CV</a>
-    </div>
-
-    <div class="share">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
-        <a href="#" class="fab fa-pinterest"></a>
-    </div>
-
-</section>
-
-<!-- home section ends -->
-
-<!-- about section starts  -->
-
-<section class="about" id="about">
-
-    <h1 class="heading"> <span>about</span> me </h1>
-
-    <div class="row">
-
-        <div class="box-container">
-            <div class="box">
-                <h3>News website</h3>
-                <p>by</p>
-				<p>Wordpress</p>
-            </div>
-			
-			  
-            <div class="box">
-                <h3>Movies review website</h3>
-                <p>by</p>
-				<p>Blogger</p>
-            </div>
-            <div class="box">
-                <h3>Movie & Live tv App</h3>
-                <p>by</p>
-				<p>Android Studio</p>
-            </div>
-            <div class="box">
-                <h3>Playstore Developer account</h3>
-               
-				<a href="https://play.google.com/store/apps/developer?id=Stechtricker" class="btn" target="_blank">Link</a>
-    
-				
-            </div>
-        </div>
-
-        <div class="content">
-            <h3>my name is <span>Suraj</span></h3>
-            <p>Passionate About App
-and Web Development
-Goal is To Achieve A
-Good Position By Doing
-Satisfying Work in The
-IT Field, Strongly Focused
-To Complete The Tasks
-In Fast-faced
-Environment.</p>
-            <a href="index.html#contact" class="btn">contact me</a>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="progress">
-            <h3> JAVA <span>65%</span> </h3>
-            <div class="bar bar-1-1"><span></span></div>
-            <h3> C <span>75%</span> </h3>
-            <div class="bar bar-1-2"><span></span></div>
-            <h3> Mysql / Google Firebase <span>80%</span> </h3>
-            <div class="bar bar-1-3"><span></span></div>
-        </div>
-
-        <div class="progress">
-            <h3> HTML <span>95%</span> </h3>
-            <div class="bar bar-2-1"><span></span></div>
-            <h3> CSS <span>80%</span> </h3>
-            <div class="bar bar-2-2"><span></span></div>
-            <h3> javascript <span>65%</span> </h3>
-            <div class="bar bar-2-3"><span></span></div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- about section ends -->
-
-<!-- services section starts  -->
-
-
-<section class="education" id="education">
-
-<h1 class="heading"> my <span>education</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>10th</span>
-        <h3>C.B.S.E</h3>
-        <p>Ram Kishan Institute Of School</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>12th</span>
-        <h3>U.P</h3>
-        <p>S G M INTER COLLEGE PALI</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>B.TECH (PURSUING)</span>
-        <h3>A.K.T.U</h3>
-        <p>Dronacharya Group of Institutions</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>CCC</span>
-        <h3>NIELIT</h3>
-        <p>ABCL Institute of Management & Technology</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>Java Programming</span>
-        <h3>Great Learning Academy</h3>
-        <p>Great Learning</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>Blockchain Basics</span>
-		<h3>Great Learning Academy</h3>
-        <p>Great Learning</p>
-    </div>
-
-</div>
-
-</section>
-
-<section class="services" id="services">
-
-    <h1 class="heading"> Course <span> Certificate </span> </h1>
-
-    <div class="box-container">
-
-        <div class="box">
-		
-            
-			<i class="fas fa-graduation-cap"></i>
-            <h3>Java Programming</h3>
-			 
-			<img src="cv\WhatsApp3.jpg" alt="">
-            <p>Great Learning</p>
-			</div>
-
-        <div class="box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>Blockchain Basics</h3>
-			<img src="cv\WhatsApp4.jpg" alt="">
-            <p>Great Learning</p>
-			</div>
-
-        <div class="box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>Game Development using PyGame</h3>
-			<img src="cv\WhatsApp2.jpeg" alt="">
-            <p>Guvi</p>
-        </div>
-
-    <!--     <div class="box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>digital marketing</h3>
-			<img src="cv\WhatsApp.jpeg" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quas delectus, laboriosam nulla dolore in.</p>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>SEO marketing</h3>
-			<img src="cv\WhatsApp.jpeg" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quas delectus, laboriosam nulla dolore in.</p>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>wordpress</h3>
-			<img src="cv\WhatsApp.jpeg" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quas delectus, laboriosam nulla dolore in.</p>
-        </div>   -->
-
-    </div>
-
-</section>
-
-<!-- services section ends -->
-
-
-
-
-
-<!-- education section starts  -->
-
-
-
-<!-- portfolio section starts  -->
-
-<section class="portfolio" id="portfolio">
-
-    <h1 class="heading"> my <span>Project</span> </h1>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="image/download.jpg" alt="">
-            <div class="content">
-                <h3>project 01</h3>
-				<p>Movies review website</p>
-				<a href="https://themoviesflixfree.blogspot.com/" class="btn" target="_blank">Link</a>
-    
-            </div>
-        </div>
-
-        <div class="box">
-		<img src="image/ic_launcher.png" alt="">
-            <div class="content">
-                <h3>project 02</h3>
-				<p>Smart Employee Attendance Management
-				   Application Using Face and Fingerprint Biometric</p>
-				<a href="https://drive.google.com/file/d/1Bm-FQbIpVLFZWJRY0zN724x2KXCttFG3/view?usp=sharing"   class="btn"   target="_blank">Admin Panel</a>
-				<a href="https://drive.google.com/file/d/1pTtXZfGTlCQl_O4Qr7HYAOrtNRE6FB62/view?usp=sharing"  class="btn"   target="_blank ">Apk</a>
-    
-    
-            </div>
-        </div>
-		
-		<div class="box">
-            <img src="image/ic_launcher2.png" alt="">
-            <div class="content">
-                <h3>project 03</h3>
-				<p>Movie & Live tv App</p>
-				<a href="https://drive.google.com/file/d/1PCByG-tPB4xNduo01sU1rN-GzQNwyeI3/view?usp=sharing" class="btn" target="_blank">Link</a>
-    
-            </div>
-        </div>
-
-
-        <div class="box">
-            <img src="image/scanner.jpg" alt="">
-            
-            <div class="content">
-                <h3>project 04</h3>
-				<p>ApnaScanner-Free PDF Scanner APP</p>
-				<a href="https://play.google.com/store/apps/details?id=com.stechtricker.apnascanner" class="btn" target="_blank"> Playstore Link</a>
-    
-            </div>
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li>
+            <button class="navbar-link active" data-target="about">About</button>
+          </li>
+          <li>
+            <button class="navbar-link" data-target="resume">Resume</button>
+          </li>
+          <li>
+            <button class="navbar-link" data-target="portfolio">Portfolio</button>
+          </li>
+          <li>
+            <button class="navbar-link" data-target="contact">Contact</button>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- About Section -->
+      <section id="about" class="section active">
+        <div class="section-header">
+          <h2>About Me</h2>
         </div>
         
-        <div class="box">
-            <img src="image/note.jpg" alt="">
-            <div class="content">
-                <h3>project 05</h3>
-				<p>Notes-Memo app</p>
-				<a href="https://play.google.com/store/apps/details?id=stechtricker.notes.app" class="btn" target="_blank"> Playstore Link</a>
-    
-            </div>
+        <div class="about-text">
+          <p>
+            I'm a passionate Software Engineer specializing in .NET technologies and Android development. 
+            With experience in building robust web applications and mobile solutions, I enjoy solving complex problems 
+            and creating efficient software solutions.
+          </p>
+          <p>
+            My expertise includes developing full-stack applications using C#, .NET Core, Blazor, and Entity Framework, 
+            along with creating user-friendly Android applications published on Google Play Store. I'm committed to 
+            writing clean, maintainable code and optimizing system performance.
+          </p>
         </div>
-
-        <div class="box">
-            <img src="image/img-6.jpg" alt="">
-            <div class="content">
-                <h3>project 06</h3>
+        
+        <div class="services">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-laptop-code"></i>
             </div>
+            <h3 class="service-title">Web Development</h3>
+            <p>Building responsive web applications using ASP.NET Core, Blazor, and JavaScript.</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="service-title">Mobile Apps</h3>
+            <p>Developing Android applications with intuitive interfaces and seamless functionality.</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3 class="service-title">Backend Services</h3>
+            <p>Creating robust backend systems, APIs, and automated services.</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="service-title">Database Optimization</h3>
+            <p>Tuning SQL queries and improving database performance.</p>
+          </div>
         </div>
-
-    </div>
-
-</section>
-
-<!-- portfolio section ends -->
-
-<!-- contact section starts -->
-
-<section class="contact" id="contact">
-
-    <h1 class="heading"> <span>contact</span> me </h1>
-
-    <form action="">
-        <input type="text" placeholder="your name" class="box">
-        <input type="email" placeholder="your email" class="box">
-        <input type="text" placeholder="subject" class="box">
-        <textarea name="" class="box" placeholder="your message" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="send message" class="btn">
-    </form>
-
-</section>
-
-<!-- contact section ends -->
-
-<div class="credits"> created by <span>SURAJ</span> | all rights reserved </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
+      </section>
+      
+      <!-- Resume Section -->
+      <section id="resume" class="section">
+        <div class="section-header">
+          <h2>Resume</h2>
+        </div>
+        
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">Apr 2023 – Present</div>
+              <h3 class="timeline-title">Associate Operations Software Engineer</h3>
+              <p class="company">Signant Health</p>
+              <ul>
+                <li>Develop and maintain web apps using C#, Blazor, .NET Core, MVC, JavaScript, HTML, CSS, MySQL, and MS SQL Server</li>
+                <li>Build email/SMS schedulers and automated data reports</li>
+                <li>Optimize SQL queries using SQL Tuning and SQL Profiler</li>
+                <li>Collaborate with senior developers to ensure code quality and scalability</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">Sep 2022 – Apr 2023</div>
+              <h3 class="timeline-title">Software Engineer</h3>
+              <p class="company">DSG, Inc.</p>
+              <ul>
+                <li>Developed internal tools with C# and .NET Framework</li>
+                <li>Created automated data reports and email systems</li>
+                <li>Fixed bugs and optimized database queries</li>
+                <li>Gained experience in debugging, testing, and version control</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">Aug 2019 – Jun 2023</div>
+              <h3 class="timeline-title">B.Tech in Computer Science and IT</h3>
+              <p class="company">Dronacharya Group of Institutions</p>
+              <p>CGPA: 7.6/10</p>
+              <p>Relevant Coursework: OOP, Databases, Data Structures & Algorithms, 
+                Operating Systems, Web Development, Android App Development</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3>Technical Skills</h3>
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span>C# & .NET</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 90%;"></div>
+              </div>
+            </div>
+            
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span>ASP.NET Core</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 85%;"></div>
+              </div>
+            </div>
+            
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span>SQL Databases</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 80%;"></div>
+              </div>
+            </div>
+            
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span>Android Development</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3>Technologies</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Blazor</span>
+              <span class="skill-tag">Entity Framework</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">SQL Profiler</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Portfolio Section -->
+      <section id="portfolio" class="section">
+        <div class="section-header">
+          <h2>Portfolio</h2>
+        </div>
+        
+        <div class="portfolio-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web Apps</button>
+          <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+        </div>
+        
+        <div class="portfolio-grid">
+          <div class="portfolio-item" data-category="web">
+            <div class="portfolio-img">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Bulk Email Sender</h3>
+              <div class="portfolio-category">.NET Worker Service</div>
+              <a href="https://github.com/surajkumar04sk/sendbulkemail" target="_blank" class="portfolio-link">
+                View Project <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="portfolio-item" data-category="web">
+            <div class="portfolio-img">
+              <i class="fas fa-film"></i>
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">MovieDetailsWebsite</h3>
+              <div class="portfolio-category">ASP.NET Core</div>
+              <a href="https://github.com/surajkumar04sk/MovieDetailsWebsite" target="_blank" class="portfolio-link">
+                View Project <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="portfolio-item" data-category="mobile">
+            <div class="portfolio-img">
+              <i class="fas fa-film"></i>
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">MovieDB App</h3>
+              <div class="portfolio-category">Android</div>
+              <a href="https://play.google.com/store/apps/details?id=com.stechtricker.metv" target="_blank" class="portfolio-link">
+                View Project <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="portfolio-item" data-category="mobile">
+            <div class="portfolio-img">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Notes-Memo App</h3>
+              <div class="portfolio-category">Android</div>
+              <a href="https://play.google.com/store/apps/details?id=stechtricker.notes.app" target="_blank" class="portfolio-link">
+                View Project <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="portfolio-item" data-category="mobile">
+            <div class="portfolio-img">
+              <i class="fas fa-music"></i>
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">YouPlay-Music</h3>
+              <div class="portfolio-category">Android</div>
+              <a href="https://github.com/surajkumar04sk/YouPlay-Music" target="_blank" class="portfolio-link">
+                View Project <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Contact Section -->
+      <section id="contact" class="section">
+        <div class="section-header">
+          <h2>Contact</h2>
+        </div>
+        
+        <div class="contact-container">
+          <div class="contact-info-card">
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>surajkumar04ks@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 9971241276</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Noida, Uttar Pradesh, India</span>
+            </div>
+            
+            <div class="social-links" style="justify-content: flex-start; margin-top: 1.5rem;">
+              <a href="https://github.com/surajkumar04sk" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/04surajkumar" target="_blank">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+            
+            <div class="contact-map">
+              <!-- Simple map representation -->
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem;"></i>
+                <p style="margin-left: 1rem;">Noida, Uttar Pradesh</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-form-card">
+            <h3>Send a Message</h3>
+            <form>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Your name">
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Your email">
+              </div>
+              
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" class="form-control" placeholder="Your message"></textarea>
+              </div>
+              
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    // Navigation functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all navigation links
+      const navLinks = document.querySelectorAll('.navbar-link');
+      const sections = document.querySelectorAll('.section');
+      
+      // Add click event to each navigation link
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          // Remove active class from all links and sections
+          navLinks.forEach(l => l.classList.remove('active'));
+          sections.forEach(s => s.classList.remove('active'));
+          
+          // Add active class to clicked link
+          this.classList.add('active');
+          
+          // Show the corresponding section
+          const targetId = this.getAttribute('data-target');
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.classList.add('active');
+          }
+        });
+      });
+      
+      // Portfolio filtering
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Get the filter value
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Show/hide portfolio items based on filter
+          portfolioItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
